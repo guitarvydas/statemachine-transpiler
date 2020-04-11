@@ -1,0 +1,23 @@
+* intro
+  Example RPA script that transpiles a simple statemachine language to Lisp
+
+* build
+#+name: transpiler
+#+begin_src lisp
+  ; use the RP Assembler to create a state machine transpiler sm.lisp program
+  (ql:quickload :statemachine-transpiler) ;; needed for package and for create-sm-lisp
+  (statemachine-transpiler::create-sm-lisp)  
+#+end_src
+
+#+name: transpiler
+#+begin_src lisp :results output
+  ;; re-load statemachine-transpiler with new sm.lisp file
+  (ql:quickload :statemachine-transpiler)
+#+end_src
+
+#+RESULTS: transpiler
+: To load "statemachine-transpiler":
+:   Load 1 ASDF system:
+:     statemachine-transpiler
+: ; Loading "statemachine-transpiler"
+: 

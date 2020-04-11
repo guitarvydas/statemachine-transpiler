@@ -1,0 +1,117 @@
+= machine
+  SYMBOL/machine
+  SYMBOL
+  @input-list
+  @output-list
+  @sm-initially
+  @states
+  SYMBOL/end SYMBOL/machine
+
+= sm-initially
+  @code
+
+= states
+  {[ ?SYMBOL/state SYMBOL/state SYMBOL @transitions
+  | * >
+  ]}
+  
+= transitions
+  {[ ?SYMBOL/on @transition
+   | * >
+  ]}
+
+= transition
+  SYMBOL/on SYMBOL ':' @statements
+
+= schematic
+  SYMBOL/schematic
+  SYMBOL
+  @parts-list
+  @wiring
+  SYMBOL/end SYMBOL/schematic
+
+= input-list
+  '['
+     @input-symbol-list
+  ']'
+  
+= output-list
+  '['
+     @output-symbol-list
+  ']'
+
+= input-symbol-list 
+  @symbol-list
+
+= output-symbol-list 
+  @symbol-list
+
+= symbol-list
+  {[ ?SYMBOL SYMBOL
+   | * >
+  ]}
+
+= parts-list
+  {[ ?SYMBOL
+    SYMBOL ':' @kind
+   | * >
+  ]}
+
+= wiring
+  {[ ?SYMBOL
+     @wire
+   | * >
+  ]}
+
+= kind
+  SYMBOL
+
+= wire
+  @sources
+  '-' '>'
+  @destinations
+
+= sources
+  @partPinList
+
+= destinations
+  @partPinList
+  
+= partPinList
+  {[ ?SYMBOL
+     SYMBOL '.' SYMBOL
+   | * >
+  ]}
+  
+= statements
+  {[ ?SYMBOL/on >
+   | ?SYMBOL/end >
+   | ?SYMBOL/send @sendStatement
+   | * @call
+   ]}
+
+= sendStatement
+  SYMBOL/send SYMBOL @expression
+
+= call
+  SYMBOL
+  @optionalParameterList
+
+= optionalParameterList
+  [ ?'(' '(' @parameters ')'
+  | *
+  ]
+
+= parameters
+  {[ ?'$' '$' SYMBOL
+   | * >
+   ]}
+
+= expression
+  '{' @expressionBody '}'
+
+= expressionBody
+  {[ ?'}' >
+   | * .
+   ]}
+
